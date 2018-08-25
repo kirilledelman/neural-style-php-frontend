@@ -201,8 +201,8 @@ function deleteFile( e ) {
 	if ( from.value && confirm( "Delete " + from.value ) ) {
 		var parts = from.value.split( '/' );
 		var params = {
-			which: parts[ 1 ],
-			name: parts[ 2 ]
+			which: parts[ 0 ],
+			name: parts[ 1 ]
 		};
 		ajax( 'sys/delete.php', params, function(){
 			repopulateFiles();

@@ -1,21 +1,37 @@
 <?php
 
+	/*
+	 * Returns files in a directory specified by 'which' post param
+	 */
+
+	include 'config.php';
+	
+	$result = array( 'success' => false );
+	
+	// validate
 	if( isset( $_POST[ 'which' ] ) &&
-	    ( $_POST[ 'which' ] == 'sources' || $_POST[ 'which' ] == 'styles' || $_POST[ 'which' ] == 'output' || $_POST[ 'which' ] == 'saved' ) ){
-		
-		$dir = $_SERVER[ 'DOCUMENT_ROOT' ]. '/'. $_POST[ 'which' ];
+	    in_array( $_POST[ 'which' ], array( 'sources', 'styles', 'output', 'saved' ) ) ) {
+	
+		// open dir
+		$dir = ROOT . '/'. $_POST[ 'which' ];
 		$handle = opendir( $dir );
-		$files = array();
-		// read
-	    while ( false !== ( $file = readdir( $handle ) ) ) {
-	        if ( $file == '.' || $file == '..' ) continue;
-	        $files[] = '{"name":"' .
-	                   addslashes( '/' . $_POST[ 'which' ] . '/' . $file ) .
-	                   '","time":' . filectime( $dir . '/' . $file ).'}';
-	    }
-	    closedir( $handle );
+		if ( $handle ) {
 		
-	    echo '{"success":true, "files":[' . join( ',', $files ) . ']}';
-	} else {
-		die( '{"success":false,"error":"Bad request"}' );
+			// read files
+			$result[ 'files' ] = array();
+			$result[ 'path' ] = $dir;
+		    while ( ( $file = readdir( $handle ) ) !== FALSE ) {
+		        if ( $file == '.' || $file == '..' ) continue;
+		        $result[ 'files' ][] = array (
+		            'name' => ( $_POST[ 'which' ] . '/' . $file ),
+			        'time' => filectime( $dir . '/' . $file ) );
+		    }
+		    closedir( $handle );
+		    $result[ 'success' ] = true;
+		    
+	    } else $result[ 'error' ] = "Unable to open directory $dir";
 	}
+	
+	// done
+	header( 'Content-type: application/json' );
+	echo json_encode( $result );

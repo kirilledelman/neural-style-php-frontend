@@ -1,19 +1,28 @@
 <?php
 	
-	$ps = shell_exec( 'ps -u _www' );
-	$obj = array( 'success' => false );
+	/*
+	 * Stops running neural-style process
+	 */
+
+	include 'config.php';
+	
+	$result = array( 'success' => false );
+
+	// get list of processes under current user
+	$ps = shell_exec( 'ps -u ' . USER );
 	$lines = explode( "\n", $ps );
 	foreach ( $lines as $ps ) {
 		
-		// find pid of precess with "luajit"
+		// find pid of process with "luajit" in name
 		if ( preg_match( "/^\s+(\d+)\s+(\d+).+luajit.+$/", $ps, $matches ) ) {
 			$pid = $matches[ 2 ];
 			if ( $pid ) {
-				$obj[ 'pid' ] = $pid;
-				$obj[ 'success' ] = shell_exec( 'kill -9 ' . $pid );
+				$result[ 'success' ] = shell_exec( 'kill -9 ' . $pid );
 				break;
 			}
 		}
 	}
 	
-	echo json_encode( $obj );
+	// done
+	header( 'Content-type: application/json' );
+	echo json_encode( $result );
