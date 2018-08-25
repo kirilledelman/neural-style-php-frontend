@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="776b013b-3964-4178-9d5e-3bae4cfccf19" name="neural style php frontend" url="http://gogoat.com/neural-style-php-frontend">
+        <fileTransfer host="gogoat.com" port="22" privateKey="$PROJECT_DIR$/../AWS/admin-key-pair.pem" rootFolder="/var/www/html/neural-style-php-frontend" accessType="SFTP" keyPair="true" username="ec2-user">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="e880f060-c7c8-4226-9587-ac26dcd56b0e" name="~/Sites" url="http://localhost">
+        <fileTransfer port="0" mountedRoot="$USER_HOME$/Sites" accessType="MOUNT" />
+      </webServer>
+    </option>
+  </component>
+</project>
