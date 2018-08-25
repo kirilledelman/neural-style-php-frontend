@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Neural Style Front End</title>
+    <link rel="stylesheet" href="css/flex.css"/>
+    <link rel="stylesheet" href="css/index.css.php"/>
+    <script src="js/index.js"></script>
+</head>
+<body>
+
+    <!-- Images picker -->
+    <div class="panel images">
+        <h1>Source</h1>
+
+        <div class="vertical layout" >
+            <div class="image-container">
+                <img id="source" class="empty" src=""/>
+                <span id="sourceInfo">None selected</span>
+            </div>
+            <select id="sources" disabled>
+            </select>
+            <div class="horizontal layout wrap">
+                <button class="file-container">
+                    Add
+                    <input id="sourceFile" which="sources" type="file"/>
+                </button>
+                <button id="btnDeleteFile" from="sources">Delete Selected</button>
+            </div>
+        </div>
+
+        <h1>Style</h1>
+
+        <li>
+            <label class="small">Style count</label>
+            <select id="style_count">
+                <option value="1">1</option>
+                <option value="2">2</option>
+            </select>
+        </li>
+
+        <div id="styleImage1" class="vertical layout" >
+            <div class="image-container">
+                <img id="style" class="empty" src=""/>
+                <span id="styleInfo">None selected</span>
+            </div>
+            <select id="styles" disabled>
+            </select>
+            <div class="horizontal layout wrap">
+                <button class="file-container">
+                    Add
+                    <input id="styleFile" which="styles" type="file"/>
+                </button>
+                <button id="btnDeleteFile1" from="styles">Delete Selected</button>
+            </div>
+
+            <li class="multiple-images">
+                <label class="small">Weight</label>
+                <input id="style_blend_weight0" title="The weight for blending the style of multiple style images."/>
+            </li>
+
+        </div>
+
+        <div id="styleImage2" class="vertical layout" hidden>
+            <div class="image-container">
+                <img id="style2" class="empty" src=""/>
+                <span id="style2Info">None selected</span>
+            </div>
+            <select id="styles2" disabled>
+            </select>
+            <div class="horizontal layout wrap">
+                <button class="file-container">
+                    Add
+                    <input id="style2File" which="styles" type="file"/>
+                </button>
+                <button id="btnDeleteFile2" from="styles2">Delete Selected</button>
+            </div>
+
+            <li class="multiple-images">
+                <label class="small">Weight</label>
+                <input id="style_blend_weight1" title="The weight for blending the style of multiple style images."/>
+            </li>
+
+        </div>
+
+    </div>
+
+    <div class="panel" id="params">
+        <h1>Settings</h1>
+
+        <a class="reset" href="javascript:resetParams()">Reset to defaults</a>
+
+        <li>
+            <label>Number of iterations</label>
+            <select id="num_iterations">
+                <option value="1">1</option>
+                <option value="10">10</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="200">200</option>
+                <option value="300">300</option>
+                <option value="400">400</option>
+                <option value="500">500</option>
+                <option value="600">600</option>
+                <option value="700">700</option>
+                <option value="800">800</option>
+                <option value="900">900</option>
+                <option value="1000">1000</option>
+            </select>
+        </li>
+
+        <li>
+            <label>Save intermediate</label>
+            <select id="save_iter">
+                <option value="0">Off (result only)</option>
+                <option value="1">Every 1</option>
+                <option value="5">Every 5</option>
+                <option value="10">Every 10</option>
+                <option value="50">Every 50</option>
+                <option value="100">Every 100</option>
+                <option value="200">Every 200</option>
+            </select>
+        </li>
+
+        <li>
+            <label>Max image size</label>
+            <input id="image_size" title="Maximum side length (in pixels) of of the generated image. Default is 512."/>
+        </li>
+
+        <li>
+            <label>Content weight</label>
+            <input id="content_weight" title="How much to weight the content reconstruction term. Default is 5."/>
+        </li>
+
+        <li>
+            <label>Style weight</label>
+            <input id="style_weight" title="How much to weight the style reconstruction term. Default is 100."/>
+        </li>
+
+        <li>
+            <label>Random seed</label>
+            <input id="seed" title="Randomizer seed."/>
+        </li>
+
+        <li>
+            <label>TV regularization</label>
+            <input id="tv_weight" title="Weight of total-variation (TV) regularization; this helps to smooth the image. Default is 0.001. Set to 0 to disable TV regularization."/>
+        </li>
+
+        <li>
+            <label>Normalize gradients</label>
+            <select id="normalize_gradients" title="If enabled, style and content gradients from each layer will be L1 normalized.">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+        </li>
+
+        <li>
+            <label>Style scale</label>
+            <input id="style_scale" title="Scale at which to extract features from the style image. Default is 1."/>
+        </li>
+
+        <li>
+            <label>Init</label>
+            <select id="init" title="Method for generating the generated image; one of random or image. Default is random which uses a noise initialization as in the paper; image initializes with the content image.">
+                <option value="random">Random</option>
+                <option value="image">Image</option>
+            </select>
+        </li>
+
+        <li>
+            <label>Content layers</label>
+            <select id="content_layers" title="Comma-separated list of layer names to use for content reconstruction. Default is relu4_2">
+                <option value="relu4_2">relu4_2</option>
+                <option value="relu4_3">relu4_3</option>
+                <option value="relu4_4">relu4_4</option>
+                <option value="relu5_1">relu5_1</option>
+                <option value="relu5_2">relu5_2</option>
+                <option value="relu5_3">relu5_3</option>
+                <option value="relu5_4">relu5_4</option>
+                <option value="relu4_2,relu5_2">relu4_2,relu5_2</option>
+                <option value="relu4_3,relu5_3">relu4_3,relu5_3</option>
+                <option value="relu4_4,relu5_4">relu4_4,relu5_4</option>
+            </select>
+        </li>
+
+        <li>
+            <label>Style layers</label>
+            <input id="style_layers" title="Comma-separated list of layer names to use for style reconstruction. Default is relu1_1,relu2_1,relu3_1,relu4_1,relu5_1"/>
+        </li>
+
+        <li>
+            <label>Style layers weights</label>
+            <!-- https://github.com/htoyryla/neural-style -->
+            <input id="style_layer_weights" title="Comma-separated list of relative layer weights to use for style reconstruction. "/>
+        </li>
+
+        <li>
+            <label>Original colors</label>
+            <select id="original_colors" title="If enabled, then the output image will keep the colors of the content image.">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+        </li>
+
+        <li>
+            <label>Pooling layers</label>
+            <select id="pooling">
+                <option value="max">Max</option>
+                <option value="avg">Avg</option>
+            </select>
+        </li>
+
+        <li>
+            <label>Output file name</label>
+            <input id="output_image" title="Leave empty for auto-naming based on parameters."/>
+        </li>
+
+        <h1>Control</h1>
+
+        <div class="status">
+            <div id="status" class="flex">&nbsp;</div>
+            <a href="javascript:void(0)" id="loadSettings" title="Load settings from last run." hidden>Load Settings</a>
+        </div>
+        <button id="btnStart">Start</button>
+        <button id="btnStop" hidden>Stop</button>
+
+    </div>
+
+    <div class="panel preview">
+        <div class="horizontal layout wrap">
+
+            <div class="vertical layout flex">
+                <h1>Preview</h1>
+                <div class="image-container flex">
+                    <img id="output" src="" class="empty"/>
+                    <span id="outputInfo">N/A</span>
+                </div>
+                <select id="outputs" size="10" disabled>
+                </select>
+                <div class="horizontal layout">
+                    <button id="btnSave">Save Selected</button>
+                </div>
+                <div class="horizontal layout">
+                    <button id="btnClearOutput" class="flex">Clear Output</button>
+                </div>
+            </div>
+            <div id="savedPanel" class="vertical layout end-justified saved-panel" hidden>
+                <h1>Saved</h1>
+                <div class="image-container flex">
+                    <img id="saved" src="" class="empty"/>
+                    <span id="savedInfo">N/A</span>
+                </div>
+                <select id="saveds" size="10" selectedIndex="0" disabled>
+                </select>
+                <div class="horizontal layout">
+                    <button id="btnDeleteSaved" from="saveds">Delete Selected</button>
+                </div>
+                <div class="horizontal layout">
+                    <button id="btnDeleteAllSaved" class="flex">Delete All Saved</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

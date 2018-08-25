@@ -1,0 +1,873 @@
+<SETTINGS>{"content_image":"\/sources\/avi.png","style_image":"\/styles\/macaronis-500x500.jpg","num_iterations":"100","image_size":"128","content_weight":"5","style_weight":"1000","tv_weight":"0.001","style_scale":"1","init":"image","content_layers":"relu4_2","style_layers":"relu1_1,relu2_1,relu3_1,relu4_1,relu5_1","style_layer_weights":"1,1,1,1,1","original_colors":"1","normalize_gradients":"1","pooling":"max","save_iter":"10","output_image":"out.png"}</SETTINGS>tput: No value for $TERM and no -T specified
+Successfully loaded models/VGG_ILSVRC_19_layers.caffemodel
+conv1_1: 64 3 3 3
+conv1_2: 64 64 3 3
+conv2_1: 128 64 3 3
+conv2_2: 128 128 3 3
+conv3_1: 256 128 3 3
+conv3_2: 256 256 3 3
+conv3_3: 256 256 3 3
+conv3_4: 256 256 3 3
+conv4_1: 512 256 3 3
+conv4_2: 512 512 3 3
+conv4_3: 512 512 3 3
+conv4_4: 512 512 3 3
+conv5_1: 512 512 3 3
+conv5_2: 512 512 3 3
+conv5_3: 512 512 3 3
+conv5_4: 512 512 3 3
+fc6: 1 1 25088 4096
+fc7: 1 1 4096 4096
+fc8: 1 1 4096 1000
+Setting up style layer  	2	:	relu1_1	
+Setting up style layer  	7	:	relu2_1	
+Setting up style layer  	12	:	relu3_1	
+Setting up style layer  	21	:	relu4_1	
+Setting up content layer	23	:	relu4_2	
+Setting up style layer  	30	:	relu5_1	
+Capturing content targets	
+nn.Sequential {
+  [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> (7) -> (8) -> (9) -> (10) -> (11) -> (12) -> (13) -> (14) -> (15) -> (16) -> (17) -> (18) -> (19) -> (20) -> (21) -> (22) -> (23) -> (24) -> (25) -> (26) -> (27) -> (28) -> (29) -> (30) -> (31) -> (32) -> (33) -> (34) -> (35) -> (36) -> (37) -> output]
+  (1): nn.TVLoss
+  (2): nn.SpatialConvolution(3 -> 64, 3x3, 1,1, 1,1)
+  (3): nn.ReLU
+  (4): nn.StyleLoss
+  (5): nn.SpatialConvolution(64 -> 64, 3x3, 1,1, 1,1)
+  (6): nn.ReLU
+  (7): nn.SpatialMaxPooling(2x2, 2,2)
+  (8): nn.SpatialConvolution(64 -> 128, 3x3, 1,1, 1,1)
+  (9): nn.ReLU
+  (10): nn.StyleLoss
+  (11): nn.SpatialConvolution(128 -> 128, 3x3, 1,1, 1,1)
+  (12): nn.ReLU
+  (13): nn.SpatialMaxPooling(2x2, 2,2)
+  (14): nn.SpatialConvolution(128 -> 256, 3x3, 1,1, 1,1)
+  (15): nn.ReLU
+  (16): nn.StyleLoss
+  (17): nn.SpatialConvolution(256 -> 256, 3x3, 1,1, 1,1)
+  (18): nn.ReLU
+  (19): nn.SpatialConvolution(256 -> 256, 3x3, 1,1, 1,1)
+  (20): nn.ReLU
+  (21): nn.SpatialConvolution(256 -> 256, 3x3, 1,1, 1,1)
+  (22): nn.ReLU
+  (23): nn.SpatialMaxPooling(2x2, 2,2)
+  (24): nn.SpatialConvolution(256 -> 512, 3x3, 1,1, 1,1)
+  (25): nn.ReLU
+  (26): nn.StyleLoss
+  (27): nn.SpatialConvolution(512 -> 512, 3x3, 1,1, 1,1)
+  (28): nn.ReLU
+  (29): nn.ContentLoss
+  (30): nn.SpatialConvolution(512 -> 512, 3x3, 1,1, 1,1)
+  (31): nn.ReLU
+  (32): nn.SpatialConvolution(512 -> 512, 3x3, 1,1, 1,1)
+  (33): nn.ReLU
+  (34): nn.SpatialMaxPooling(2x2, 2,2)
+  (35): nn.SpatialConvolution(512 -> 512, 3x3, 1,1, 1,1)
+  (36): nn.ReLU
+  (37): nn.StyleLoss
+}
+Capturing style target 1	
+Running optimization with L-BFGS	
+Iteration 1 / 100	
+  Content 1 loss: 0.000000	
+  Style 1 loss: 2878453.613281	
+  Style 2 loss: 77334945.312500	
+  Style 3 loss: 51866402.343750	
+  Style 4 loss: 3435162500.000000	
+  Style 5 loss: 882025.512695	
+  Total loss: 3568124326.782227	
+<optim.lbfgs> 	creating recyclable direction/step/history buffers	
+Iteration 2 / 100	
+  Content 1 loss: 0.000100	
+  Style 1 loss: 2878453.369141	
+  Style 2 loss: 77334953.125000	
+  Style 3 loss: 51866359.375000	
+  Style 4 loss: 3435152500.000000	
+  Style 5 loss: 882013.244629	
+  Total loss: 3568114279.113870	
+Iteration 3 / 100	
+  Content 1 loss: 0.957640	
+  Style 1 loss: 2878406.738281	
+  Style 2 loss: 77335195.312500	
+  Style 3 loss: 51859113.281250	
+  Style 4 loss: 3433797250.000000	
+  Style 5 loss: 880478.820801	
+  Total loss: 3566750445.110472	
+Iteration 4 / 100	
+  Content 1 loss: 312583.125000	
+  Style 1 loss: 2846853.271484	
+  Style 2 loss: 76183664.062500	
+  Style 3 loss: 47728417.968750	
+  Style 4 loss: 2837204500.000000	
+  Style 5 loss: 353520.141602	
+  Total loss: 2964629538.569336	
+Iteration 5 / 100	
+  Content 1 loss: 1662837.812500	
+  Style 1 loss: 2773763.671875	
+  Style 2 loss: 64619765.625000	
+  Style 3 loss: 40462550.781250	
+  Style 4 loss: 2190138250.000000	
+  Style 5 loss: 172787.353516	
+  Total loss: 2299829955.244141	
+Iteration 6 / 100	
+  Content 1 loss: 2941502.812500	
+  Style 1 loss: 2671636.230469	
+  Style 2 loss: 41019308.593750	
+  Style 3 loss: 36149648.437500	
+  Style 4 loss: 1454680000.000000	
+  Style 5 loss: 141506.042480	
+  Total loss: 1537603602.116699	
+Iteration 7 / 100	
+  Content 1 loss: 3349704.062500	
+  Style 1 loss: 2577236.328125	
+  Style 2 loss: 36072101.562500	
+  Style 3 loss: 33492382.812500	
+  Style 4 loss: 1096326625.000000	
+  Style 5 loss: 112593.620300	
+  Total loss: 1171930643.385925	
+Iteration 8 / 100	
+  Content 1 loss: 3961121.875000	
+  Style 1 loss: 2423838.623047	
+  Style 2 loss: 31575281.250000	
+  Style 3 loss: 29184601.562500	
+  Style 4 loss: 791235875.000000	
+  Style 5 loss: 94497.688293	
+  Total loss: 858475215.998840	
+Iteration 9 / 100	
+  Content 1 loss: 4295522.187500	
+  Style 1 loss: 2218088.623047	
+  Style 2 loss: 27464644.531250	
+  Style 3 loss: 21277320.312500	
+  Style 4 loss: 541393687.500000	
+  Style 5 loss: 83295.898438	
+  Total loss: 596732559.052734	
+Iteration 10 / 100	
+  Content 1 loss: 4783688.437500	
+  Style 1 loss: 2011979.736328	
+  Style 2 loss: 24341107.421875	
+  Style 3 loss: 17311134.765625	
+  Style 4 loss: 382084125.000000	
+  Style 5 loss: 73976.341248	
+  Total loss: 430606011.702576	
+Iteration 11 / 100	
+  Content 1 loss: 4474298.125000	
+  Style 1 loss: 1915620.605469	
+  Style 2 loss: 22169640.625000	
+  Style 3 loss: 13643296.875000	
+  Style 4 loss: 346246312.500000	
+  Style 5 loss: 70344.413757	
+  Total loss: 388519513.144226	
+Iteration 12 / 100	
+  Content 1 loss: 4904438.437500	
+  Style 1 loss: 1801420.288086	
+  Style 2 loss: 20618412.109375	
+  Style 3 loss: 12562796.875000	
+  Style 4 loss: 253194765.625000	
+  Style 5 loss: 65593.841553	
+  Total loss: 293147427.176514	
+Iteration 13 / 100	
+  Content 1 loss: 5074851.875000	
+  Style 1 loss: 1755408.813477	
+  Style 2 loss: 19816390.625000	
+  Style 3 loss: 11467600.585938	
+  Style 4 loss: 204026453.125000	
+  Style 5 loss: 60852.172852	
+  Total loss: 242201557.197266	
+Iteration 14 / 100	
+  Content 1 loss: 5073696.250000	
+  Style 1 loss: 1701618.652344	
+  Style 2 loss: 18743583.984375	
+  Style 3 loss: 10198975.585938	
+  Style 4 loss: 169625468.750000	
+  Style 5 loss: 57502.376556	
+  Total loss: 205400845.599213	
+Iteration 15 / 100	
+  Content 1 loss: 5246625.625000	
+  Style 1 loss: 1476578.613281	
+  Style 2 loss: 15593527.343750	
+  Style 3 loss: 8069272.460938	
+  Style 4 loss: 144152609.375000	
+  Style 5 loss: 54833.778381	
+  Total loss: 174593447.196350	
+Iteration 16 / 100	
+  Content 1 loss: 5117216.562500	
+  Style 1 loss: 1455476.318359	
+  Style 2 loss: 14796766.601562	
+  Style 3 loss: 6848242.187500	
+  Style 4 loss: 114793296.875000	
+  Style 5 loss: 48353.199005	
+  Total loss: 143059351.743927	
+Iteration 17 / 100	
+  Content 1 loss: 5320708.750000	
+  Style 1 loss: 1374146.972656	
+  Style 2 loss: 13887073.242188	
+  Style 3 loss: 6450960.937500	
+  Style 4 loss: 96450601.562500	
+  Style 5 loss: 45520.858765	
+  Total loss: 123529012.323608	
+Iteration 18 / 100	
+  Content 1 loss: 5400970.625000	
+  Style 1 loss: 1309498.535156	
+  Style 2 loss: 13105974.609375	
+  Style 3 loss: 6007905.761719	
+  Style 4 loss: 87915632.812500	
+  Style 5 loss: 44237.209320	
+  Total loss: 113784219.553070	
+Iteration 19 / 100	
+  Content 1 loss: 5429050.625000	
+  Style 1 loss: 1259613.159180	
+  Style 2 loss: 12387311.523438	
+  Style 3 loss: 5529855.957031	
+  Style 4 loss: 77916234.375000	
+  Style 5 loss: 41245.941162	
+  Total loss: 102563311.580811	
+Iteration 20 / 100	
+  Content 1 loss: 5495127.500000	
+  Style 1 loss: 1162511.596680	
+  Style 2 loss: 11066918.945312	
+  Style 3 loss: 4876797.363281	
+  Style 4 loss: 67705445.312500	
+  Style 5 loss: 36011.333466	
+  Total loss: 90342812.051239	
+Iteration 21 / 100	
+  Content 1 loss: 5568986.250000	
+  Style 1 loss: 1077002.563477	
+  Style 2 loss: 10029507.812500	
+  Style 3 loss: 4186756.835938	
+  Style 4 loss: 59562664.062500	
+  Style 5 loss: 33559.894562	
+  Total loss: 80458477.418976	
+Iteration 22 / 100	
+  Content 1 loss: 5761045.625000	
+  Style 1 loss: 952566.223145	
+  Style 2 loss: 9068445.312500	
+  Style 3 loss: 4219553.710938	
+  Style 4 loss: 60491027.343750	
+  Style 5 loss: 32200.054169	
+  Total loss: 80524838.269501	
+Iteration 23 / 100	
+  Content 1 loss: 5595592.500000	
+  Style 1 loss: 1015530.334473	
+  Style 2 loss: 9188597.656250	
+  Style 3 loss: 3774920.898438	
+  Style 4 loss: 52774851.562500	
+  Style 5 loss: 30750.631332	
+  Total loss: 72380243.582993	
+Iteration 24 / 100	
+  Content 1 loss: 5610691.250000	
+  Style 1 loss: 996415.893555	
+  Style 2 loss: 8977836.914062	
+  Style 3 loss: 3647034.912109	
+  Style 4 loss: 47623628.906250	
+  Style 5 loss: 30040.225983	
+  Total loss: 66885648.101959	
+Iteration 25 / 100	
+  Content 1 loss: 5671957.500000	
+  Style 1 loss: 950011.413574	
+  Style 2 loss: 8490642.578125	
+  Style 3 loss: 3533891.357422	
+  Style 4 loss: 45368804.687500	
+  Style 5 loss: 28924.711227	
+  Total loss: 64044232.247849	
+Iteration 26 / 100	
+  Content 1 loss: 5703664.375000	
+  Style 1 loss: 908967.102051	
+  Style 2 loss: 8015367.187500	
+  Style 3 loss: 3341307.373047	
+  Style 4 loss: 42998433.593750	
+  Style 5 loss: 27837.203979	
+  Total loss: 60995576.835327	
+Iteration 27 / 100	
+  Content 1 loss: 5780100.625000	
+  Style 1 loss: 822602.355957	
+  Style 2 loss: 7100899.902344	
+  Style 3 loss: 3033576.171875	
+  Style 4 loss: 39868441.406250	
+  Style 5 loss: 25540.523529	
+  Total loss: 56631160.984955	
+Iteration 28 / 100	
+  Content 1 loss: 5817482.500000	
+  Style 1 loss: 751774.414062	
+  Style 2 loss: 6327419.433594	
+  Style 3 loss: 2622292.968750	
+  Style 4 loss: 41376992.187500	
+  Style 5 loss: 25809.646606	
+  Total loss: 56921771.150513	
+Iteration 29 / 100	
+  Content 1 loss: 5767082.500000	
+  Style 1 loss: 790860.107422	
+  Style 2 loss: 6671950.195312	
+  Style 3 loss: 2589490.234375	
+  Style 4 loss: 34554855.468750	
+  Style 5 loss: 24665.859222	
+  Total loss: 50398904.365082	
+Iteration 30 / 100	
+  Content 1 loss: 5805921.875000	
+  Style 1 loss: 745965.393066	
+  Style 2 loss: 6255024.414062	
+  Style 3 loss: 2547651.123047	
+  Style 4 loss: 33139304.687500	
+  Style 5 loss: 23568.960190	
+  Total loss: 48517436.452866	
+Iteration 31 / 100	
+  Content 1 loss: 5844240.625000	
+  Style 1 loss: 716051.757812	
+  Style 2 loss: 5988568.847656	
+  Style 3 loss: 2479134.765625	
+  Style 4 loss: 32182917.968750	
+  Style 5 loss: 22998.010635	
+  Total loss: 47233911.975479	
+Iteration 32 / 100	
+  Content 1 loss: 5873323.125000	
+  Style 1 loss: 672153.625488	
+  Style 2 loss: 5579074.707031	
+  Style 3 loss: 2340149.658203	
+  Style 4 loss: 31212001.953125	
+  Style 5 loss: 22223.178864	
+  Total loss: 45698926.247711	
+Iteration 33 / 100	
+  Content 1 loss: 5906406.250000	
+  Style 1 loss: 635517.272949	
+  Style 2 loss: 5252136.230469	
+  Style 3 loss: 2233449.462891	
+  Style 4 loss: 29110439.453125	
+  Style 5 loss: 21295.495987	
+  Total loss: 43159244.165421	
+Iteration 34 / 100	
+  Content 1 loss: 5913158.750000	
+  Style 1 loss: 556181.701660	
+  Style 2 loss: 4564901.855469	
+  Style 3 loss: 2058878.173828	
+  Style 4 loss: 29695412.109375	
+  Style 5 loss: 20880.702972	
+  Total loss: 42809413.293304	
+Iteration 35 / 100	
+  Content 1 loss: 5891870.000000	
+  Style 1 loss: 566730.529785	
+  Style 2 loss: 4553446.777344	
+  Style 3 loss: 1958112.670898	
+  Style 4 loss: 26089009.765625	
+  Style 5 loss: 20459.056854	
+  Total loss: 39079628.800507	
+Iteration 36 / 100	
+  Content 1 loss: 5963551.250000	
+  Style 1 loss: 510963.195801	
+  Style 2 loss: 4197187.988281	
+  Style 3 loss: 1939953.857422	
+  Style 4 loss: 25613308.593750	
+  Style 5 loss: 20076.450348	
+  Total loss: 38245041.335602	
+Iteration 37 / 100	
+  Content 1 loss: 5939420.625000	
+  Style 1 loss: 505121.307373	
+  Style 2 loss: 4082366.699219	
+  Style 3 loss: 1868412.597656	
+  Style 4 loss: 24496212.890625	
+  Style 5 loss: 20039.653778	
+  Total loss: 36911573.773651	
+Iteration 38 / 100	
+  Content 1 loss: 5903277.500000	
+  Style 1 loss: 479943.389893	
+  Style 2 loss: 3797938.232422	
+  Style 3 loss: 1742136.108398	
+  Style 4 loss: 23756898.437500	
+  Style 5 loss: 19794.227600	
+  Total loss: 35699987.895813	
+Iteration 39 / 100	
+  Content 1 loss: 5894467.500000	
+  Style 1 loss: 457787.933350	
+  Style 2 loss: 3591770.996094	
+  Style 3 loss: 1661758.422852	
+  Style 4 loss: 22950230.468750	
+  Style 5 loss: 19346.216202	
+  Total loss: 34575361.537247	
+Iteration 40 / 100	
+  Content 1 loss: 5885451.875000	
+  Style 1 loss: 369985.198975	
+  Style 2 loss: 2945505.371094	
+  Style 3 loss: 1531807.739258	
+  Style 4 loss: 24363767.578125	
+  Style 5 loss: 18372.339249	
+  Total loss: 35114890.101700	
+Iteration 41 / 100	
+  Content 1 loss: 5873663.125000	
+  Style 1 loss: 379122.589111	
+  Style 2 loss: 2942987.304688	
+  Style 3 loss: 1418659.545898	
+  Style 4 loss: 21898464.843750	
+  Style 5 loss: 18197.845459	
+  Total loss: 32531095.253906	
+Iteration 42 / 100	
+  Content 1 loss: 5916385.625000	
+  Style 1 loss: 353905.456543	
+  Style 2 loss: 2825553.466797	
+  Style 3 loss: 1417597.290039	
+  Style 4 loss: 20527111.328125	
+  Style 5 loss: 17953.199387	
+  Total loss: 31058506.365891	
+Iteration 43 / 100	
+  Content 1 loss: 5912333.125000	
+  Style 1 loss: 345098.907471	
+  Style 2 loss: 2746592.285156	
+  Style 3 loss: 1388027.465820	
+  Style 4 loss: 19911154.296875	
+  Style 5 loss: 17445.226669	
+  Total loss: 30320651.306992	
+Iteration 44 / 100	
+  Content 1 loss: 5919262.500000	
+  Style 1 loss: 325544.097900	
+  Style 2 loss: 2622661.865234	
+  Style 3 loss: 1371712.768555	
+  Style 4 loss: 19296876.953125	
+  Style 5 loss: 16904.529572	
+  Total loss: 29552962.714386	
+Iteration 45 / 100	
+  Content 1 loss: 5934566.875000	
+  Style 1 loss: 306490.722656	
+  Style 2 loss: 2451914.306641	
+  Style 3 loss: 1301431.640625	
+  Style 4 loss: 18202230.468750	
+  Style 5 loss: 16070.474625	
+  Total loss: 28212704.488297	
+Iteration 46 / 100	
+  Content 1 loss: 5988101.250000	
+  Style 1 loss: 247435.485840	
+  Style 2 loss: 2141074.218750	
+  Style 3 loss: 1277175.170898	
+  Style 4 loss: 19341203.125000	
+  Style 5 loss: 15849.354744	
+  Total loss: 29010838.605232	
+Iteration 47 / 100	
+  Content 1 loss: 5964330.000000	
+  Style 1 loss: 262892.181396	
+  Style 2 loss: 2155463.378906	
+  Style 3 loss: 1206490.112305	
+  Style 4 loss: 16909603.515625	
+  Style 5 loss: 15336.467743	
+  Total loss: 26514115.655975	
+Iteration 48 / 100	
+  Content 1 loss: 5971691.250000	
+  Style 1 loss: 243484.619141	
+  Style 2 loss: 2024919.799805	
+  Style 3 loss: 1173321.044922	
+  Style 4 loss: 17258148.437500	
+  Style 5 loss: 15112.365723	
+  Total loss: 26686677.517090	
+Iteration 49 / 100	
+  Content 1 loss: 5983564.375000	
+  Style 1 loss: 232859.237671	
+  Style 2 loss: 1963693.481445	
+  Style 3 loss: 1152875.732422	
+  Style 4 loss: 16286956.054688	
+  Style 5 loss: 14975.808144	
+  Total loss: 25634924.689369	
+Iteration 50 / 100	
+  Content 1 loss: 5995094.375000	
+  Style 1 loss: 206352.508545	
+  Style 2 loss: 1816837.524414	
+  Style 3 loss: 1125843.872070	
+  Style 4 loss: 15955011.718750	
+  Style 5 loss: 14729.102135	
+  Total loss: 25113869.100914	
+Iteration 51 / 100	
+  Content 1 loss: 5995081.875000	
+  Style 1 loss: 188210.403442	
+  Style 2 loss: 1703395.996094	
+  Style 3 loss: 1086582.031250	
+  Style 4 loss: 15317695.312500	
+  Style 5 loss: 14436.717987	
+  Total loss: 24305402.336273	
+Iteration 52 / 100	
+  Content 1 loss: 6010197.500000	
+  Style 1 loss: 139544.937134	
+  Style 2 loss: 1494180.419922	
+  Style 3 loss: 1090783.203125	
+  Style 4 loss: 17780964.843750	
+  Style 5 loss: 13767.679214	
+  Total loss: 26529438.583145	
+Iteration 53 / 100	
+  Content 1 loss: 5970733.750000	
+  Style 1 loss: 164871.337891	
+  Style 2 loss: 1520386.840820	
+  Style 3 loss: 1001218.505859	
+  Style 4 loss: 14594758.789062	
+  Style 5 loss: 13488.700867	
+  Total loss: 23265457.924500	
+Iteration 54 / 100	
+  Content 1 loss: 5975229.375000	
+  Style 1 loss: 157288.024902	
+  Style 2 loss: 1484560.546875	
+  Style 3 loss: 982215.087891	
+  Style 4 loss: 14043597.656250	
+  Style 5 loss: 13583.243370	
+  Total loss: 22656473.934288	
+Iteration 55 / 100	
+  Content 1 loss: 5989882.500000	
+  Style 1 loss: 143507.919312	
+  Style 2 loss: 1429953.979492	
+  Style 3 loss: 976505.493164	
+  Style 4 loss: 13765270.507812	
+  Style 5 loss: 13367.668152	
+  Total loss: 22318488.067932	
+Iteration 56 / 100	
+  Content 1 loss: 5993001.250000	
+  Style 1 loss: 129579.971313	
+  Style 2 loss: 1355405.639648	
+  Style 3 loss: 958179.626465	
+  Style 4 loss: 13521632.812500	
+  Style 5 loss: 13155.192375	
+  Total loss: 21970954.492302	
+Iteration 57 / 100	
+  Content 1 loss: 6013853.750000	
+  Style 1 loss: 116110.595703	
+  Style 2 loss: 1270491.455078	
+  Style 3 loss: 938726.135254	
+  Style 4 loss: 13068504.882812	
+  Style 5 loss: 12748.714447	
+  Total loss: 21420435.533295	
+Iteration 58 / 100	
+  Content 1 loss: 6004103.750000	
+  Style 1 loss: 108690.010071	
+  Style 2 loss: 1193378.662109	
+  Style 3 loss: 906651.306152	
+  Style 4 loss: 12494216.796875	
+  Style 5 loss: 12654.811859	
+  Total loss: 20719695.337067	
+Iteration 59 / 100	
+  Content 1 loss: 5997783.750000	
+  Style 1 loss: 107271.385193	
+  Style 2 loss: 1152402.465820	
+  Style 3 loss: 876774.841309	
+  Style 4 loss: 12253494.140625	
+  Style 5 loss: 12473.410606	
+  Total loss: 20400199.993553	
+Iteration 60 / 100	
+  Content 1 loss: 6016716.875000	
+  Style 1 loss: 89548.568726	
+  Style 2 loss: 1061664.550781	
+  Style 3 loss: 866023.498535	
+  Style 4 loss: 12717806.640625	
+  Style 5 loss: 12548.871994	
+  Total loss: 20764309.005661	
+Iteration 61 / 100	
+  Content 1 loss: 6021496.250000	
+  Style 1 loss: 92224.510193	
+  Style 2 loss: 1070591.186523	
+  Style 3 loss: 855625.427246	
+  Style 4 loss: 11777155.273438	
+  Style 5 loss: 12219.353676	
+  Total loss: 19829312.001076	
+Iteration 62 / 100	
+  Content 1 loss: 6024725.625000	
+  Style 1 loss: 86528.594971	
+  Style 2 loss: 1035285.644531	
+  Style 3 loss: 838409.667969	
+  Style 4 loss: 11493666.992188	
+  Style 5 loss: 11968.015671	
+  Total loss: 19490584.540329	
+Iteration 63 / 100	
+  Content 1 loss: 6031480.625000	
+  Style 1 loss: 71378.654480	
+  Style 2 loss: 958638.671875	
+  Style 3 loss: 806535.766602	
+  Style 4 loss: 11275550.781250	
+  Style 5 loss: 11697.421074	
+  Total loss: 19155281.920280	
+Iteration 64 / 100	
+  Content 1 loss: 6006265.625000	
+  Style 1 loss: 69541.496277	
+  Style 2 loss: 929664.062500	
+  Style 3 loss: 766005.187988	
+  Style 4 loss: 10943851.562500	
+  Style 5 loss: 11404.776573	
+  Total loss: 18726732.710838	
+Iteration 65 / 100	
+  Content 1 loss: 6018900.000000	
+  Style 1 loss: 59688.751221	
+  Style 2 loss: 902092.102051	
+  Style 3 loss: 758691.650391	
+  Style 4 loss: 10607000.976562	
+  Style 5 loss: 11215.604782	
+  Total loss: 18357589.085007	
+Iteration 66 / 100	
+  Content 1 loss: 6018816.875000	
+  Style 1 loss: 57948.085785	
+  Style 2 loss: 878855.041504	
+  Style 3 loss: 742391.967773	
+  Style 4 loss: 10228259.765625	
+  Style 5 loss: 10940.472603	
+  Total loss: 17937212.208290	
+Iteration 67 / 100	
+  Content 1 loss: 6014676.250000	
+  Style 1 loss: 51873.981476	
+  Style 2 loss: 828578.063965	
+  Style 3 loss: 717755.371094	
+  Style 4 loss: 10293748.046875	
+  Style 5 loss: 10678.471565	
+  Total loss: 17917310.184975	
+Iteration 68 / 100	
+  Content 1 loss: 6006695.625000	
+  Style 1 loss: 53176.918030	
+  Style 2 loss: 811416.381836	
+  Style 3 loss: 697146.362305	
+  Style 4 loss: 9884603.515625	
+  Style 5 loss: 10526.763916	
+  Total loss: 17463565.566711	
+Iteration 69 / 100	
+  Content 1 loss: 6020495.625000	
+  Style 1 loss: 48473.613739	
+  Style 2 loss: 798059.875488	
+  Style 3 loss: 692033.813477	
+  Style 4 loss: 9565117.187500	
+  Style 5 loss: 10339.416504	
+  Total loss: 17134519.531708	
+Iteration 70 / 100	
+  Content 1 loss: 6037807.500000	
+  Style 1 loss: 43716.892242	
+  Style 2 loss: 785846.252441	
+  Style 3 loss: 684388.732910	
+  Style 4 loss: 9303174.804688	
+  Style 5 loss: 10110.615730	
+  Total loss: 16865044.798012	
+Iteration 71 / 100	
+  Content 1 loss: 6046154.375000	
+  Style 1 loss: 41533.199310	
+  Style 2 loss: 758899.841309	
+  Style 3 loss: 662300.781250	
+  Style 4 loss: 8933762.695312	
+  Style 5 loss: 9888.459206	
+  Total loss: 16452539.351387	
+Iteration 72 / 100	
+  Content 1 loss: 6058961.875000	
+  Style 1 loss: 37200.527191	
+  Style 2 loss: 714183.715820	
+  Style 3 loss: 633989.379883	
+  Style 4 loss: 8852193.359375	
+  Style 5 loss: 9761.501312	
+  Total loss: 16306290.358582	
+Iteration 73 / 100	
+  Content 1 loss: 6050601.250000	
+  Style 1 loss: 39182.239532	
+  Style 2 loss: 697181.579590	
+  Style 3 loss: 616443.847656	
+  Style 4 loss: 8516380.859375	
+  Style 5 loss: 9647.409439	
+  Total loss: 15929437.185593	
+Iteration 74 / 100	
+  Content 1 loss: 6050820.000000	
+  Style 1 loss: 37691.314697	
+  Style 2 loss: 685209.045410	
+  Style 3 loss: 607532.897949	
+  Style 4 loss: 8314128.906250	
+  Style 5 loss: 9526.884079	
+  Total loss: 15704909.048386	
+Iteration 75 / 100	
+  Content 1 loss: 6054500.000000	
+  Style 1 loss: 34708.854675	
+  Style 2 loss: 665046.752930	
+  Style 3 loss: 597407.165527	
+  Style 4 loss: 8213679.687500	
+  Style 5 loss: 9343.564987	
+  Total loss: 15574686.025620	
+Iteration 76 / 100	
+  Content 1 loss: 6052909.375000	
+  Style 1 loss: 33844.463348	
+  Style 2 loss: 655834.045410	
+  Style 3 loss: 587687.011719	
+  Style 4 loss: 7910807.617188	
+  Style 5 loss: 9111.797333	
+  Total loss: 15250194.309998	
+Iteration 77 / 100	
+  Content 1 loss: 6053551.250000	
+  Style 1 loss: 30328.556061	
+  Style 2 loss: 627225.891113	
+  Style 3 loss: 568143.615723	
+  Style 4 loss: 7623167.480469	
+  Style 5 loss: 8630.301476	
+  Total loss: 14911047.094841	
+Iteration 78 / 100	
+  Content 1 loss: 6048865.625000	
+  Style 1 loss: 30161.172867	
+  Style 2 loss: 612742.187500	
+  Style 3 loss: 549169.677734	
+  Style 4 loss: 7444038.085938	
+  Style 5 loss: 8676.371574	
+  Total loss: 14693653.120613	
+Iteration 79 / 100	
+  Content 1 loss: 6059601.875000	
+  Style 1 loss: 28904.930115	
+  Style 2 loss: 604651.672363	
+  Style 3 loss: 544272.583008	
+  Style 4 loss: 7185872.070312	
+  Style 5 loss: 8540.998459	
+  Total loss: 14431844.129257	
+Iteration 80 / 100	
+  Content 1 loss: 6066788.750000	
+  Style 1 loss: 27685.628891	
+  Style 2 loss: 596500.122070	
+  Style 3 loss: 539168.945312	
+  Style 4 loss: 7035094.726562	
+  Style 5 loss: 8404.463768	
+  Total loss: 14273642.636604	
+Iteration 81 / 100	
+  Content 1 loss: 6067568.125000	
+  Style 1 loss: 27119.073868	
+  Style 2 loss: 589690.490723	
+  Style 3 loss: 531803.222656	
+  Style 4 loss: 6887864.746094	
+  Style 5 loss: 8376.505852	
+  Total loss: 14112422.164192	
+Iteration 82 / 100	
+  Content 1 loss: 6065976.875000	
+  Style 1 loss: 26265.846252	
+  Style 2 loss: 574714.538574	
+  Style 3 loss: 511350.860596	
+  Style 4 loss: 6708977.050781	
+  Style 5 loss: 8342.815399	
+  Total loss: 13895627.986603	
+Iteration 83 / 100	
+  Content 1 loss: 6069051.875000	
+  Style 1 loss: 24405.996323	
+  Style 2 loss: 563232.910156	
+  Style 3 loss: 501396.972656	
+  Style 4 loss: 6701717.773438	
+  Style 5 loss: 8252.373695	
+  Total loss: 13868057.901268	
+Iteration 84 / 100	
+  Content 1 loss: 6061696.875000	
+  Style 1 loss: 25043.453217	
+  Style 2 loss: 559757.934570	
+  Style 3 loss: 496265.899658	
+  Style 4 loss: 6460007.324219	
+  Style 5 loss: 8063.062668	
+  Total loss: 13610834.549332	
+Iteration 85 / 100	
+  Content 1 loss: 6063795.625000	
+  Style 1 loss: 24519.168854	
+  Style 2 loss: 554255.676270	
+  Style 3 loss: 490615.081787	
+  Style 4 loss: 6340378.906250	
+  Style 5 loss: 7846.150398	
+  Total loss: 13481410.608559	
+Iteration 86 / 100	
+  Content 1 loss: 6058070.625000	
+  Style 1 loss: 22950.469971	
+  Style 2 loss: 533529.052734	
+  Style 3 loss: 473933.715820	
+  Style 4 loss: 6236868.164062	
+  Style 5 loss: 7460.274696	
+  Total loss: 13332812.302284	
+Iteration 87 / 100	
+  Content 1 loss: 6069463.125000	
+  Style 1 loss: 21950.401306	
+  Style 2 loss: 519114.013672	
+  Style 3 loss: 462690.948486	
+  Style 4 loss: 5961290.039062	
+  Style 5 loss: 7189.592838	
+  Total loss: 13041698.120365	
+Iteration 88 / 100	
+  Content 1 loss: 6058421.875000	
+  Style 1 loss: 21152.860641	
+  Style 2 loss: 498376.983643	
+  Style 3 loss: 444514.801025	
+  Style 4 loss: 5817035.156250	
+  Style 5 loss: 7017.086029	
+  Total loss: 12846518.762589	
+Iteration 89 / 100	
+  Content 1 loss: 6065092.500000	
+  Style 1 loss: 20842.832565	
+  Style 2 loss: 492033.691406	
+  Style 3 loss: 438642.150879	
+  Style 4 loss: 5670407.226562	
+  Style 5 loss: 6918.866634	
+  Total loss: 12693937.268047	
+Iteration 90 / 100	
+  Content 1 loss: 6078731.250000	
+  Style 1 loss: 19808.406830	
+  Style 2 loss: 480465.209961	
+  Style 3 loss: 432939.788818	
+  Style 4 loss: 5629876.464844	
+  Style 5 loss: 6756.727219	
+  Total loss: 12648577.847672	
+Iteration 91 / 100	
+  Content 1 loss: 6079796.250000	
+  Style 1 loss: 20054.601669	
+  Style 2 loss: 473869.445801	
+  Style 3 loss: 427216.461182	
+  Style 4 loss: 5577650.878906	
+  Style 5 loss: 6744.963646	
+  Total loss: 12585332.601204	
+Iteration 92 / 100	
+  Content 1 loss: 6072575.625000	
+  Style 1 loss: 19689.155579	
+  Style 2 loss: 469669.403076	
+  Style 3 loss: 421903.686523	
+  Style 4 loss: 5381316.406250	
+  Style 5 loss: 6652.546406	
+  Total loss: 12371806.822834	
+Iteration 93 / 100	
+  Content 1 loss: 6071802.500000	
+  Style 1 loss: 18923.082352	
+  Style 2 loss: 462266.601562	
+  Style 3 loss: 417385.437012	
+  Style 4 loss: 5287165.039062	
+  Style 5 loss: 6508.987427	
+  Total loss: 12264051.647415	
+Iteration 94 / 100	
+  Content 1 loss: 6072117.500000	
+  Style 1 loss: 18424.568176	
+  Style 2 loss: 455185.729980	
+  Style 3 loss: 411213.409424	
+  Style 4 loss: 5184593.261719	
+  Style 5 loss: 6383.930683	
+  Total loss: 12147918.399982	
+Iteration 95 / 100	
+  Content 1 loss: 6080220.000000	
+  Style 1 loss: 16585.550308	
+  Style 2 loss: 431790.832520	
+  Style 3 loss: 392178.222656	
+  Style 4 loss: 4982881.835938	
+  Style 5 loss: 6077.214718	
+  Total loss: 11909733.656139	
+Iteration 96 / 100	
+  Content 1 loss: 6089210.000000	
+  Style 1 loss: 15769.383430	
+  Style 2 loss: 413392.974854	
+  Style 3 loss: 376203.521729	
+  Style 4 loss: 4932633.789062	
+  Style 5 loss: 5895.260334	
+  Total loss: 11833104.929409	
+Iteration 97 / 100	
+  Content 1 loss: 6090214.375000	
+  Style 1 loss: 15114.964485	
+  Style 2 loss: 405353.942871	
+  Style 3 loss: 369469.818115	
+  Style 4 loss: 4725089.355469	
+  Style 5 loss: 5831.541061	
+  Total loss: 11611073.997002	
+Iteration 98 / 100	
+  Content 1 loss: 6085893.125000	
+  Style 1 loss: 14990.887642	
+  Style 2 loss: 399807.495117	
+  Style 3 loss: 361933.013916	
+  Style 4 loss: 4652921.875000	
+  Style 5 loss: 5781.289101	
+  Total loss: 11521327.685776	
+Iteration 99 / 100	
+  Content 1 loss: 6095956.250000	
+  Style 1 loss: 14098.513603	
+  Style 2 loss: 392404.296875	
+  Style 3 loss: 358004.760742	
+  Style 4 loss: 4595898.925781	
+  Style 5 loss: 5637.414932	
+  Total loss: 11462000.161934	
+Iteration 100 / 100	
+  Content 1 loss: 6095656.250000	
+  Style 1 loss: 14013.944626	
+  Style 2 loss: 388004.638672	
+  Style 3 loss: 352379.608154	
+  Style 4 loss: 4444955.566406	
+  Style 5 loss: 5547.752857	
+  Total loss: 11300557.760715	
+<optim.lbfgs> 	reached max number of iterations	
+Exit code 0
