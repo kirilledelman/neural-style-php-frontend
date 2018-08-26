@@ -14,8 +14,8 @@
 	foreach ( $lines as $ps ) {
 		
 		// find pid of process with "luajit" in name
-		if ( preg_match( "/^\s+(\d+)\s+(\d+).+luajit.+$/", $ps, $matches ) ) {
-			$pid = $matches[ 2 ];
+		if ( preg_match( "/^\\s*(\d+).+luajit.*$/", $ps, $matches ) ) {
+			$pid = $matches[ 1 ];
 			if ( $pid ) {
 				$result[ 'success' ] = shell_exec( 'kill -9 ' . $pid );
 				break;

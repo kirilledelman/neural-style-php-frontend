@@ -217,7 +217,15 @@
         <h1>Settings Presets</h1>
 
         <div>
-            <a class="reset" href="javascript:resetParams()">Reset to defaults</a>
+            <a class="reset" href="javascript:resetParams()">Reset all to defaults</a>
+            <button id="btnSavePreset">Save Current As Preset</button>
+            <div>
+                <div class="horizontal layout">
+                    <select id="presets" nosave="1"></select>
+                    <button id="btnLoadPreset">Load</button>
+                    <button id="btnDeletePreset">Delete</button>
+                </div>
+            </div>
         </div>
 
         <h1>Control</h1>

@@ -353,7 +353,7 @@ body {
 
     font-family: sans-serif;
     font-weight: 400;
-    font-size: 1vw;
+    font-size: 12px;
     
     padding: 1em;
     
@@ -507,10 +507,6 @@ div.panel div.image-container span {
     min-width: 100%;
 }
 
-.panel.preview {
-    <?=$layout_flex?>
-}
-
 .status {
     background: lightgoldenrodyellow;
     padding: 0.25em;
@@ -520,7 +516,7 @@ div.panel div.image-container span {
 }
 
 div.images.panel {
-    max-width: 10em;
+    max-width: 100%;
 }
 
 #btnStart, #btnStop { width: 100%; margin: 0;}

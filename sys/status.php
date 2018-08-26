@@ -20,7 +20,7 @@
 			$result[ 'status' ] = "Finished";
 			
 			// error?
-			if ( stripos( $contents, "error" ) !== FALSE ) {
+			if ( stripos( $contents, "error" ) !== FALSE || stripos( $contents, "error" ) !== FALSE ) {
 				
 				$result[ 'status' ] = "Error detected";
 				$result[ 'log' ] = $contents;
@@ -54,6 +54,7 @@
 	
 	}
 	
+	$result[ 'user' ] = USER;
 	// done
 	header( 'Content-type: application/json' );
 	echo json_encode( $result );

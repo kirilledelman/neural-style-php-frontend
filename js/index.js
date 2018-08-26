@@ -23,9 +23,10 @@ document.addEventListener("DOMContentLoaded", function() {
 	$('#btnDeleteSaved').onclick = deleteFile;
 	$('#btnDeleteAllSaved').onclick = deleteAllSaved;
 	$('#loadSettings').onclick = loadSettings;
+	$('#btnSavePreset').onclick = savePreset;
 	
 	// defaults
-	var inputs = $$('input,select');
+	var inputs = $$('input,select:not([nosave])');
 	var defaults = document.paramsDefaults = {
 		'style_count': 1,
 		'style_blend_weight0': '1',
@@ -64,63 +65,16 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 		
 		fld.addEventListener( 'change', rememberValue );
+		fld.addEventListener( 'blur', validateAll );
 	}
 	
 	// refresh
+	loadPresets();
 	refreshStatus();
 	styleCountChanged();
 	repopulateFiles();
 	
 } );
-
-
-function refreshStatus() {
-	ajax( 'sys/status.php', {}, function ( r ) {
-		r = JSON.parse( r );
-		var btnStart = $('#btnStart');
-		var btnStop = $('#btnStop');
-		var status = $('#status');
-		if ( r.ready ) {
-			btnStop.hidden = true;
-			btnStart.disabled = false;
-			btnStart.hidden = false;
-			validateImages();
-			stopRefreshStatus();
-			if ( r.log ) console.log( r.log );
-		} else {
-			btnStop.hidden = false;
-			btnStart.hidden = true;
-			if ( !document.statusRefreshInterval ) startRefreshStatus();
-		}
-		
-		try {
-			if ( r.settings ) {
-				$('#loadSettings').hidden = false;
-				$('#loadSettings').settings = JSON.parse( r.settings );
-			} else {
-				$('#loadSettings').hidden = true;
-			}
-		} catch( e ) { $('#loadSettings').hidden = true; }
-		
-		// refresh output dir if status changed
-		if ( status.textContent != r.status ) {
-			status.textContent = r.status;
-			ajax( 'sys/get-files.php', { which: 'output' }, populateSelect( $( '#outputs' ), true ) );
-		}
-	} );
-}
-
-function startRefreshStatus() {
-	stopRefreshStatus();
-	document.statusRefreshInterval = setInterval( refreshStatus, 2000 );
-}
-
-function stopRefreshStatus(){
-	if ( document.statusRefreshInterval ) {
-		clearInterval( document.statusRefreshInterval );
-	}
-	document.statusRefreshInterval = 0;
-}
 
 function start() {
 
@@ -193,6 +147,127 @@ function loadSettings( e ) {
 			$('#style_count').onchange();
 		}
 	}
+}
+
+function validateAll( e ) {
+
+}
+
+function loadPreset( e ) {
+	var presets = (localStorage.getItem( 'presets' ) || "");
+	presets = presets ? JSON.parse( presets ) : {};
+	var preset = presets[ e.target.getAttribute( 'name' ) ];
+	for ( var i in preset ) {
+		$('#' + i).value = preset[ i ];
+	}
+}
+
+function loadPresets() {
+
+	var presets = (localStorage.getItem( 'presets' ) || "");
+	presets = presets ? JSON.parse( presets ) : {};
+	for ( var pname in presets ) {
+		var row = document.createElement( 'div' );
+		row.onclick = loadPreset;
+		row.setAttribute( 'name', pname );
+		row.classList.add( 'preset' );
+		row.textContent = pname + ' ';
+		var del = document.createElement( 'a' );
+		del.textContent = 'X';
+		del.href = 'javascript:void(0);'
+		del.onclick = deletePreset;
+		row.appendChild( del );
+		$('#presets').appendChild( row );
+	}
+}
+
+function savePreset() {
+	var pname;
+	if ( ( pname = prompt( "Preset name?" ) ) ) {
+		var inputs = $$('input,select:not([nosave])');
+		var preset = {};
+		for ( var i in inputs ) {
+			preset[ inputs[ i ].id ] = inputs[ i ].value;
+		}
+		var presets = (localStorage.getItem( 'presets' ) || "");
+		presets = presets ? JSON.parse( presets ) : {};
+		presets[ pname ] = preset;
+		localStorage.setItem( 'presets', JSON.stringify(presets) );
+		
+		// add row
+		var row = document.createElement( 'div' );
+		row.onclick = loadPreset;
+		row.setAttribute( 'name', pname );
+		row.classList.add( 'preset' );
+		row.textContent = pname + ' ';
+		var del = document.createElement( 'a' );
+		del.textContent = 'X';
+		del.href = 'javascript:void(0);'
+		del.onclick = deletePreset;
+		row.appendChild( del );
+		$('#presets').appendChild( row );
+	}
+}
+
+function deletePreset( e ) {
+	var row = e.target.parentNode;
+	var pname = row.getAttribute( 'name' );
+	if ( confirm( "Delete " + pname + " preset? " ) ) {
+		row.parentNode.removeChild( row );
+		var presets = (localStorage.getItem( 'presets' ) || "");
+		presets = presets ? JSON.parse( presets ) : {};
+		delete presets[ pname ];
+		localStorage.setItem( 'presets', JSON.stringify(presets) );
+	}
+}
+
+
+function refreshStatus() {
+	ajax( 'sys/status.php', {}, function ( r ) {
+		r = JSON.parse( r );
+		var btnStart = $('#btnStart');
+		var btnStop = $('#btnStop');
+		var status = $('#status');
+		if ( r.ready ) {
+			btnStop.hidden = true;
+			btnStart.disabled = false;
+			btnStart.hidden = false;
+			validateImages();
+			stopRefreshStatus();
+			if ( r.log ) console.log( r.log );
+		} else {
+			btnStop.hidden = false;
+			btnStart.hidden = true;
+			if ( !document.statusRefreshInterval ) startRefreshStatus();
+		}
+		
+		try {
+			if ( r.settings ) {
+				$('#loadSettings').hidden = false;
+				$('#loadSettings').settings = JSON.parse( r.settings );
+			} else {
+				$('#loadSettings').hidden = true;
+			}
+		} catch( e ) { $('#loadSettings').hidden = true; }
+		
+		// refresh output dir if status changed
+		if ( status.textContent != r.status ) {
+			status.textContent = r.status;
+			ajax( 'sys/get-files.php', { which: 'output' }, populateSelect( $( '#outputs' ), true ) );
+		}
+	} );
+}
+
+function startRefreshStatus() {
+	stopRefreshStatus();
+	document.statusRefreshInterval = setInterval( refreshStatus, 2000 );
+}
+
+function stopRefreshStatus(){
+	if ( document.statusRefreshInterval ) {
+		clearInterval( document.statusRefreshInterval );
+	}
+	document.statusRefreshInterval = 0;
 }
 
 function deleteFile( e ) {

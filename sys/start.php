@@ -37,16 +37,16 @@
 	// dump current settings into log
 	$logFile = ROOT . '/log.txt';
 	if ( file_exists( $logFile ) ) unlink( $logFile );
-	file_put_contents( $logFile, "<SETTINGS>" . json_encode( $_POST ) . "</SETTINGS>" );
+	file_put_contents( $logFile, "<SETTINGS>" . json_encode( $_POST ) . "</SETTINGS>\n" );
 
-	// if using original_colors flag, we'll use original neural_style.lua
-	// otherwise use one that allows tuning style layers weights (https://github.com/htoyryla/neural-style)
-	if ( $_POST[ 'original_colors' ] == '0' ) {
-		unset( $_POST[ 'original_colors' ] );
-		$lua_file = 'neural_style_layer_weights.lua';
-	} else {
+	// if using original_colors flag, we'll use original neural_style.lua located in jsjohnson/neural-style
+	// otherwise use one that allows tuning style layers weights (https://github.com/htoyryla/neural-style), from /sys
+	if ( $_POST[ 'original_colors' ] == '1' ) {
 		unset( $_POST[ 'style_layer_weights' ] );
-		$lua_file = 'neural_style.lua';
+		$lua_file = NEURAL_STYLE_PATH . 'neural_style.lua';
+	} else {
+		unset( $_POST[ 'original_colors' ] );
+		$lua_file = ROOT . '/sys/' . 'neural_style_layer_weights.lua';
 	}
 
 	// read and tweak params from $_POST
@@ -78,7 +78,7 @@
 	}
 	
 	// build command line command for torch + neural-style
-	$cmd = TORCH_PATH . ' ' . ROOT . '/sys/' . $lua_file .
+	$cmd = TORCH_PATH . ' ' . $lua_file .
 	       ' -gpu -1 -print_iter 1 ' . join( ' ', $params );
 	
 	// build command line command to run in background and print to log
