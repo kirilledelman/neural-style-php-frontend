@@ -88,8 +88,6 @@
     <div class="panel" id="params">
         <h1>Settings</h1>
 
-        <a class="reset" href="javascript:resetParams()">Reset to defaults</a>
-
         <li>
             <label>Number of iterations</label>
             <select id="num_iterations">
@@ -216,6 +214,12 @@
             <input id="output_image" title="Leave empty for auto-naming based on parameters."/>
         </li>
 
+        <h1>Settings Presets</h1>
+
+        <div>
+            <a class="reset" href="javascript:resetParams()">Reset to defaults</a>
+        </div>
+
         <h1>Control</h1>
 
         <div class="status">
@@ -228,9 +232,9 @@
     </div>
 
     <div class="panel preview">
-        <div class="horizontal layout wrap">
+        <div class="horizontal layout">
 
-            <div class="vertical layout flex">
+            <div class="vertical layout">
                 <h1>Preview</h1>
                 <div class="image-container flex">
                     <img id="output" src="" class="empty"/>
@@ -245,7 +249,13 @@
                     <button id="btnClearOutput" class="flex">Clear Output</button>
                 </div>
             </div>
-            <div id="savedPanel" class="vertical layout end-justified saved-panel" hidden>
+        </div>
+
+    </div>
+
+    <div id="savedPanel" class="panel preview" hidden>
+        <div class="horizontal layout">
+            <div class="vertical layout end-justified saved-panel" >
                 <h1>Saved</h1>
                 <div class="image-container flex">
                     <img id="saved" src="" class="empty"/>
@@ -261,8 +271,6 @@
                 </div>
             </div>
         </div>
-
     </div>
-
 </body>
 </html>

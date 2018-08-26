@@ -54,8 +54,6 @@
 	
 	}
 	
-	$result[ 'torch' ] = TORCH_PATH;
- 
 	// done
 	header( 'Content-type: application/json' );
 	echo json_encode( $result );

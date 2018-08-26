@@ -449,10 +449,12 @@ select {
     top: 0;
 }
 
-a.reset { text-align: right; font-size: 80%;
+a.reset {
+    text-align: right; font-size: 80%;
     height: 0;
-    position: relative; top: -2em;
-    overflow: visible; display: block; }
+    position: relative; top: -1.6em;
+    overflow: visible; display: block;
+}
 
 
 .preview select { width: 100%; }
