@@ -9,8 +9,10 @@
 	$result = array( 'success' => false );
 
 	// get list of processes under current user
-	$ps = shell_exec( 'ps -u ' . USER );
+	$ps = shell_exec( 'ps -o pid -o command -u ' . USER );
 	$lines = explode( "\n", $ps );
+	
+	// scan the rest
 	foreach ( $lines as $ps ) {
 		
 		// find pid of process with "luajit" in name
