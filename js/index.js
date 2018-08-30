@@ -23,10 +23,12 @@ document.addEventListener("DOMContentLoaded", function() {
 	$('#btnDeleteSaved').onclick = deleteFile;
 	$('#btnDeleteAllSaved').onclick = deleteAllSaved;
 	$('#loadSettings').onclick = loadSettings;
+	$('#btnLoadPreset').onclick = loadPreset;
 	$('#btnSavePreset').onclick = savePreset;
+	$('#btnDeletePreset').onclick = deletePreset;
 	
 	// defaults
-	var inputs = $$('input,select:not([nosave])');
+	var inputs = $$('input:not([nosave]),select:not([nosave])');
 	var defaults = document.paramsDefaults = {
 		'style_count': 1,
 		'style_blend_weight0': '1',
@@ -119,10 +121,16 @@ function stop() {
 }
 
 function loadSettings( e ) {
-	var settings = $('#loadSettings').settings;
+	var settings = e;
+	if ( e.__proto__ == MouseEvent.prototype ) {
+		settings = $( '#loadSettings' ).settings;
+	}
 	for( var s in settings ) {
 		var fld = $('#' + s);
-		if ( fld ) fld.value = settings[ s ];
+		if ( fld ) {
+			fld.value = settings[ s ];
+			fld.dispatchEvent( new Event( 'change' ) );
+		}
 	}
 	if ( settings.style_blend_weights ){
 		var p = settings.style_blend_weights.split( ',' );
@@ -155,65 +163,65 @@ function validateAll( e ) {
 
 function loadPreset( e ) {
 	var presets = (localStorage.getItem( 'presets' ) || "");
+	var dropdown = $('#presets');
 	presets = presets ? JSON.parse( presets ) : {};
-	var preset = presets[ e.target.getAttribute( 'name' ) ];
-	for ( var i in preset ) {
-		$('#' + i).value = preset[ i ];
-	}
+	loadSettings( presets[ dropdown.value ] );
 }
 
 function loadPresets() {
 
 	var presets = (localStorage.getItem( 'presets' ) || "");
 	presets = presets ? JSON.parse( presets ) : {};
+	var dropdown = $('#presets');
+	var selected = -1;
 	for ( var pname in presets ) {
-		var row = document.createElement( 'div' );
-		row.onclick = loadPreset;
-		row.setAttribute( 'name', pname );
-		row.classList.add( 'preset' );
-		row.textContent = pname + ' ';
-		var del = document.createElement( 'a' );
-		del.textContent = 'X';
-		del.href = 'javascript:void(0);'
-		del.onclick = deletePreset;
-		row.appendChild( del );
-		$('#presets').appendChild( row );
+		var row = document.createElement( 'option' );
+		var preset = presets[ pname ];
+		row.text = row.value = pname;
+		dropdown.options.add( row );
+		if ( selected < 0 ) {
+			var found = true;
+			for ( var i in preset ) {
+				var fld = $('#' + i);
+				if ( fld && fld.value != preset[ i ] && fld.getAttribute( 'initValue' ) != preset[ i ] ) {
+					found = false; break;
+				}
+			}
+			if ( found ) selected = dropdown.options.length - 1;
+		}
 	}
+	dropdown.selectedIndex = selected;
 }
 
 function savePreset() {
 	var pname;
 	if ( ( pname = prompt( "Preset name?" ) ) ) {
-		var inputs = $$('input,select:not([nosave])');
+		var presets = (localStorage.getItem( 'presets' ) || "");
+		var newRow = ( presets[ pname ] === undefined );
+		var inputs = $$('input:not([nosave]),select:not([nosave])');
 		var preset = {};
 		for ( var i in inputs ) {
 			preset[ inputs[ i ].id ] = inputs[ i ].value;
 		}
-		var presets = (localStorage.getItem( 'presets' ) || "");
 		presets = presets ? JSON.parse( presets ) : {};
 		presets[ pname ] = preset;
 		localStorage.setItem( 'presets', JSON.stringify(presets) );
 		
 		// add row
-		var row = document.createElement( 'div' );
-		row.onclick = loadPreset;
-		row.setAttribute( 'name', pname );
-		row.classList.add( 'preset' );
-		row.textContent = pname + ' ';
-		var del = document.createElement( 'a' );
-		del.textContent = 'X';
-		del.href = 'javascript:void(0);'
-		del.onclick = deletePreset;
-		row.appendChild( del );
-		$('#presets').appendChild( row );
+		var dropdown = $('#presets');
+		if ( newRow ) {
+			var row = document.createElement( 'option' );
+			row.text = row.value = pname;
+			dropdown.appendChild( row );
+		}
 	}
 }
 
 function deletePreset( e ) {
-	var row = e.target.parentNode;
-	var pname = row.getAttribute( 'name' );
-	if ( confirm( "Delete " + pname + " preset? " ) ) {
-		row.parentNode.removeChild( row );
+	var dropdown = $('#presets');
+	var pname = dropdown.value;
+	if ( pname && confirm( "Delete " + pname + " preset? " ) ) {
+		dropdown.options.remove( dropdown.selectedIndex );
 		var presets = (localStorage.getItem( 'presets' ) || "");
 		presets = presets ? JSON.parse( presets ) : {};
 		delete presets[ pname ];

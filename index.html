@@ -8,7 +8,6 @@
     <script src="js/index.js"></script>
 </head>
 <body>
-
     <!-- Images picker -->
     <div class="panel images">
         <h1>Source</h1>
@@ -23,7 +22,7 @@
             <div class="horizontal layout wrap">
                 <button class="file-container">
                     Add
-                    <input id="sourceFile" which="sources" type="file"/>
+                    <input id="sourceFile" which="sources" nosave="1" type="file"/>
                 </button>
                 <button id="btnDeleteFile" from="sources">Delete Selected</button>
             </div>
@@ -49,7 +48,7 @@
             <div class="horizontal layout wrap">
                 <button class="file-container">
                     Add
-                    <input id="styleFile" which="styles" type="file"/>
+                    <input id="styleFile" which="styles" nosave="1" type="file"/>
                 </button>
                 <button id="btnDeleteFile1" from="styles">Delete Selected</button>
             </div>
@@ -71,7 +70,7 @@
             <div class="horizontal layout wrap">
                 <button class="file-container">
                     Add
-                    <input id="style2File" which="styles" type="file"/>
+                    <input id="style2File" which="styles" nosave="1" type="file"/>
                 </button>
                 <button id="btnDeleteFile2" from="styles2">Delete Selected</button>
             </div>
@@ -248,7 +247,7 @@
                     <img id="output" src="" class="empty"/>
                     <span id="outputInfo">N/A</span>
                 </div>
-                <select id="outputs" size="10" disabled>
+                <select id="outputs" size="10" nosave="1" disabled>
                 </select>
                 <div class="horizontal layout">
                     <button id="btnSave">Save Selected</button>
