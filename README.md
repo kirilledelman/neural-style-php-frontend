@@ -6,7 +6,7 @@ via a front-end written in PHP.
 This project was developed and tested on MacOS, as well as
 Amazon EC2 CentOS instance, using Apache with PHP 7.
 
-![Screenshot](https://github.com/kirilledelman/neural-style-php-frontend/tree/master/css/screenshot.png "Screenshot")
+![Screenshot](https://github.com/kirilledelman/neural-style-php-frontend/blob/master/css/screenshot.png?raw=true "Screenshot")
 
 ## Installation:
 
