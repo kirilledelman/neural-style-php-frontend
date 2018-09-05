@@ -167,7 +167,16 @@
 
         <li>
             <label>Content layers</label>
-            <select id="content_layers" title="Comma-separated list of layer names to use for content reconstruction. Default is relu4_2">
+            <select id="content_layers" multiple size="6" class="flex" title="Comma-separated list of layer names to use for content reconstruction. Default is relu4_2">
+                <option value="relu1_1">relu1_1</option>
+                <option value="relu1_2">relu1_2</option>
+                <option value="relu2_1">relu2_1</option>
+                <option value="relu2_2">relu2_2</option>
+                <option value="relu3_1">relu3_1</option>
+                <option value="relu3_2">relu3_2</option>
+                <option value="relu3_3">relu3_3</option>
+                <option value="relu3_4">relu3_4</option>
+                <option value="relu4_1">relu4_1</option>
                 <option value="relu4_2">relu4_2</option>
                 <option value="relu4_3">relu4_3</option>
                 <option value="relu4_4">relu4_4</option>
@@ -175,15 +184,29 @@
                 <option value="relu5_2">relu5_2</option>
                 <option value="relu5_3">relu5_3</option>
                 <option value="relu5_4">relu5_4</option>
-                <option value="relu4_2,relu5_2">relu4_2,relu5_2</option>
-                <option value="relu4_3,relu5_3">relu4_3,relu5_3</option>
-                <option value="relu4_4,relu5_4">relu4_4,relu5_4</option>
             </select>
         </li>
 
         <li>
             <label>Style layers</label>
-            <input id="style_layers" title="Comma-separated list of layer names to use for style reconstruction. Default is relu1_1,relu2_1,relu3_1,relu4_1,relu5_1"/>
+            <select id="style_layers" title="Comma-separated list of layer names to use for style reconstruction. Default is relu1_1,relu2_1,relu3_1,relu4_1,relu5_1" multiple size="6" class="flex">
+                <option value="relu1_1">relu1_1</option>
+                <option value="relu1_2">relu1_2</option>
+                <option value="relu2_1">relu2_1</option>
+                <option value="relu2_2">relu2_2</option>
+                <option value="relu3_1">relu3_1</option>
+                <option value="relu3_2">relu3_2</option>
+                <option value="relu3_3">relu3_3</option>
+                <option value="relu3_4">relu3_4</option>
+                <option value="relu4_1">relu4_1</option>
+                <option value="relu4_2">relu4_2</option>
+                <option value="relu4_3">relu4_3</option>
+                <option value="relu4_4">relu4_4</option>
+                <option value="relu5_1">relu5_1</option>
+                <option value="relu5_2">relu5_2</option>
+                <option value="relu5_3">relu5_3</option>
+                <option value="relu5_4">relu5_4</option>
+            </select>
         </li>
 
         <li>

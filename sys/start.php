@@ -7,6 +7,7 @@
 	include 'config.php';
 	
 	$result = array( 'success' => false );
+	$logFile = ROOT . '/log.txt';
 
 	// just in case, check for currently running neural-style
 	$ps = shell_exec( 'ps -u ' . USER );
@@ -34,11 +35,6 @@
 	closedir( $handle );
 	foreach ( $files as $f ) unlink( $dir . $f );
 	
-	// dump current settings into log
-	$logFile = ROOT . '/log.txt';
-	if ( file_exists( $logFile ) ) unlink( $logFile );
-	file_put_contents( $logFile, "<SETTINGS>" . json_encode( $_POST ) . "</SETTINGS>\n" );
-
 	// if using original_colors flag, we'll use original neural_style.lua located in jsjohnson/neural-style
 	// otherwise use one that allows tuning style layers weights (https://github.com/htoyryla/neural-style), from /sys
 	if ( $_POST[ 'original_colors' ] == '1' ) {
@@ -87,6 +83,12 @@
 	   'echo "Exit code $?" >> '.$logFile.
 	   ') > /dev/null 2>&1 & echo $!';
 	
+	// dump current settings into log
+	if ( file_exists( $logFile ) ) unlink( $logFile );
+	file_put_contents( $logFile,
+       "<COMMAND>$script</COMMAND>\n\n".
+       "<SETTINGS>" . json_encode( $_POST ) . "</SETTINGS>\n\n" );
+
 	// launch it
 	$result[ 'exec' ] = shell_exec( $script );
 	$result[ 'success' ] = true;

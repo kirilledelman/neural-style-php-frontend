@@ -59,9 +59,17 @@ document.addEventListener("DOMContentLoaded", function() {
 			v = defaults[ fld.id ];
 		}
 		
+		// default
+		fld.setAttribute( 'default', defaults[ fld.id ] );
+		
 		// delayed set
 		if ( fld.options && fld.options.length == 0 ) {
 			fld.setAttribute( 'initValue', v );
+		} else if ( fld.multiple ) {
+			v = v.split( ',' );
+			for ( var o in fld.options ) {
+				fld.options[ o ].selected = (v.indexOf( fld.options[ o ].value ) != -1 );
+			}
 		} else {
 			fld.value = v;
 		}
@@ -79,7 +87,28 @@ document.addEventListener("DOMContentLoaded", function() {
 } );
 
 function start() {
-
+	
+	// multiple  options
+	var fld = $('#content_layers'), vv = [];
+	for( var i in fld.options ) if ( fld.options[ i ].selected ) vv.push( fld.options[ i ].value );
+	var content_layers = vv.join(',');
+	
+	// multiple  options
+	fld = $('#style_layers'); vv = [];
+	for( var i in fld.options ) if ( fld.options[ i ].selected ) vv.push( fld.options[ i ].value );
+	var style_layers = vv.join(',');
+	
+	// ensure number of layers
+	var style_weights = $('#style_layer_weights').value.split(/\s*,\s*/);
+	if ( style_weights.length != vv.length ) {
+		for ( var i = 0; i < vv.length; i++ ) {
+			if ( isNaN( parseFloat(style_weights[ i ]) ) ) style_weights[ i ] = style_weights[ 0 ];
+		}
+	}
+	style_weights.length = vv.length;
+	style_weights = style_weights.join(',');
+	
+	// combine
 	var params = {
 		content_image: $('#sources').value,
 		style_image: $('#styles').value,
@@ -90,22 +119,24 @@ function start() {
 		tv_weight: $('#tv_weight').value,
 		style_scale: $('#style_scale').value,
 		init: $('#init').value,
-		content_layers: $('#content_layers').value,
-		style_layers: $('#style_layers').value,
-		style_layer_weights: $('#style_layer_weights').value,
+		content_layers: content_layers,
+		style_layers: style_layers,
+		style_layer_weights: style_weights,
 		original_colors: $('#original_colors').value,
 		normalize_gradients: $('#normalize_gradients').value,
 		pooling: $('#pooling').value,
 		save_iter: $('#save_iter').value,
 		output_image: $('#output_image').value,
 	}
+	
+	// only if multiple styles
 	if ( $('#style_count').value == 2 ) {
 		params.style_blend_weights = $( '#style_blend_weight0' ).value + ',' + $( '#style_blend_weight1' ).value;
 		params.style_image += ',' + $( '#styles2' ).value;
 	}
 	
+	// go
 	$('#btnStart').disabled = true;
-	
 	ajax( 'sys/start.php', params, function(r){
 		startRefreshStatus();
 	} );
@@ -128,7 +159,13 @@ function loadSettings( e ) {
 	for( var s in settings ) {
 		var fld = $('#' + s);
 		if ( fld ) {
-			fld.value = settings[ s ];
+			var val = settings[ s ];
+			if ( fld.multiple ) {
+				val = val.split( ',' );
+				for ( var o in fld.options ) {
+					fld.options[ o ].selected = (val.indexOf( fld.options[ o ].value ) != -1 );
+				}
+			} else fld.value = val;
 			fld.dispatchEvent( new Event( 'change' ) );
 		}
 	}
@@ -158,12 +195,48 @@ function loadSettings( e ) {
 }
 
 function validateAll( e ) {
-
+	var inputs = $$('input:not([nosave]),select:not([nosave])');
+	var valid = true;
+	for ( var i in inputs ) {
+		var fld = inputs[ i ];
+		var val = fld.value;
+		var fieldError = false;
+		var def = fld.getAttribute( 'default' );
+		// multiple selection - require one
+		if ( fld.multiple ) {
+			var haveOne = false;
+			for ( var o in fld.options ) {
+				if ( fld.options[ o ].selected ) { haveOne = true; break; }
+			}
+			if ( !haveOne ) {
+				valid = false;
+				fieldError = true;
+			}
+		} else if ( fld.tagName == 'INPUT' ) {
+			var min = parseFloat( fld.getAttribute( 'min' ) );
+			var max = parseFloat( fld.getAttribute( 'max' ) );
+			if ( val ) {
+			
+			}
+			if ( !isNaN( min ) ) {
+			
+			}
+		} else {
+			valid = valid && (val != '');
+			fld.classList.toggle( 'error', !val );
+		}
+		//
+		fld.classList.toggle( 'error', fieldError );
+		
+	}
+	
+	$('#btnStart').disabled = !valid;
 }
 
 function loadPreset( e ) {
 	var presets = (localStorage.getItem( 'presets' ) || "");
 	var dropdown = $('#presets');
+	if ( !dropdown.value ) return;
 	presets = presets ? JSON.parse( presets ) : {};
 	loadSettings( presets[ dropdown.value ] );
 }
@@ -173,24 +246,14 @@ function loadPresets() {
 	var presets = (localStorage.getItem( 'presets' ) || "");
 	presets = presets ? JSON.parse( presets ) : {};
 	var dropdown = $('#presets');
-	var selected = -1;
+	var row = document.createElement( 'option' );
+	dropdown.options.add( row );
 	for ( var pname in presets ) {
-		var row = document.createElement( 'option' );
+		row = document.createElement( 'option' );
 		var preset = presets[ pname ];
 		row.text = row.value = pname;
 		dropdown.options.add( row );
-		if ( selected < 0 ) {
-			var found = true;
-			for ( var i in preset ) {
-				var fld = $('#' + i);
-				if ( fld && fld.value != preset[ i ] && fld.getAttribute( 'initValue' ) != preset[ i ] ) {
-					found = false; break;
-				}
-			}
-			if ( found ) selected = dropdown.options.length - 1;
-		}
 	}
-	dropdown.selectedIndex = selected;
 }
 
 function savePreset() {
@@ -201,7 +264,16 @@ function savePreset() {
 		var inputs = $$('input:not([nosave]),select:not([nosave])');
 		var preset = {};
 		for ( var i in inputs ) {
-			preset[ inputs[ i ].id ] = inputs[ i ].value;
+			var fld = inputs[ i ];
+			var val = inputs[ i ].value;
+			if ( fld.multiple ) {
+				val = [];
+				for ( var o in fld.options ) {
+					if ( fld.options[ o ].selected ) val.push( fld.options[ o ].value );
+				}
+				val = val.join( ',' );
+			}
+			preset[ inputs[ i ].id ] = val;
 		}
 		presets = presets ? JSON.parse( presets ) : {};
 		presets[ pname ] = preset;
@@ -220,6 +292,7 @@ function savePreset() {
 function deletePreset( e ) {
 	var dropdown = $('#presets');
 	var pname = dropdown.value;
+	if ( !dropdown.value ) return;
 	if ( pname && confirm( "Delete " + pname + " preset? " ) ) {
 		dropdown.options.remove( dropdown.selectedIndex );
 		var presets = (localStorage.getItem( 'presets' ) || "");
@@ -321,7 +394,16 @@ function clearOutput() {
 
 // field changed
 function rememberValue( e ) {
-	localStorage.setItem( e.target.id, e.target.value );
+	var fld = e.target;
+	var val = fld.value;
+	if ( fld.multiple ) {
+		val = [];
+		for ( var o in fld.options ) {
+			if ( fld.options[ o ].selected ) val.push( fld.options[ o ].value );
+		}
+		val = val.join( ',' );
+	}
+	localStorage.setItem( e.target.id, val );
 	
 	// fix
 	if ( e.target.id == 'original_colors' ) {
@@ -335,7 +417,12 @@ function resetParams() {
 	for ( var i = 0; i < inputs.length; i++ ) {
 		var fld = inputs[ i ];
 		if ( document.paramsDefaults[ fld.id ] !== undefined ) {
-			fld.value = document.paramsDefaults[ fld.id ];
+			if ( fld.multiple ) {
+				var val = document.paramsDefaults[ fld.id ].split( ',' );
+				for ( var o in fld.options ) {
+					fld.options[ o ].selected = (val.indexOf( fld.options[ o ].value ) != -1 );
+				}
+			} else fld.value = document.paramsDefaults[ fld.id ];
 			localStorage.setItem( fld.id, fld.value );
 		}
 	}
