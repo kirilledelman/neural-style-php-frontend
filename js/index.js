@@ -215,12 +215,15 @@ function validateAll( e ) {
 		} else if ( fld.tagName == 'INPUT' ) {
 			var min = parseFloat( fld.getAttribute( 'min' ) );
 			var max = parseFloat( fld.getAttribute( 'max' ) );
-			if ( val ) {
-			
-			}
-			if ( !isNaN( min ) ) {
-			
-			}
+			if ( val != '' && !isNaN( val = parseFloat( val ) ) ) {
+				if ( !isNaN( min ) ) {
+					val = Math.max( min, val );
+				}
+				if ( !isNaN( max ) ) {
+					val = Math.min( max, val );
+				}
+				fld.value = val;
+			} else fieldError = true;
 		} else {
 			valid = valid && (val != '');
 			fld.classList.toggle( 'error', !val );
@@ -286,6 +289,7 @@ function savePreset() {
 			row.text = row.value = pname;
 			dropdown.appendChild( row );
 		}
+		dropdown.selectedIndex = dropdown.options.length - 1;
 	}
 }
 

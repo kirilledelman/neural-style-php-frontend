@@ -6,6 +6,8 @@ via a front-end written in PHP.
 This project was developed and tested on MacOS, as well as
 Amazon EC2 CentOS instance, using Apache with PHP 7.
 
+![Screenshot](https://github.com/kirilledelman/neural-style-php-frontend/tree/master/css/screenshot.png "Screenshot")
+
 ## Installation:
 
 To get this running on a Mac as localhost, first enable the webserver.
@@ -54,7 +56,7 @@ sudo yum install protobuf-compiler protobuf-devel
 luarocks install loadcaffe
 ```
 
-Same goes for neural-style itself - it's easiest to install into the same directory as the front end, but
+Same goes for [https://github.com/jcjohnson/neural-style](jcjohnson/neural-style) itself - it's easiest to install into the same directory as the front end, but
 if you already have it installed, you should be able to just update `sys/config.php` with path to
 your installation.
 
@@ -86,5 +88,5 @@ General points:
 * Make sure Apache can invoke **`th`** with neural_style.lua, if not, try installing torch and neural-style repositories inside this project's folder. 
 The hardcoded paths to `torch` and to `neural_style` are in `config.php`.  
 * Try running the command (from `<COMMAND>` block ) on the console yourself, see what errors you get.  
-
+* If you still can't get it to work, create an issue here on github and I'll try to help you out.
  

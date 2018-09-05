@@ -14,7 +14,7 @@
 		
 		// check if process is finished
 		$contents = file_get_contents( $logFile );
-		if ( strpos( $contents, "Exit code" ) !== FALSE ) {
+		if ( preg_match( "/Exit code \\d+/", $contents ) ) {
 		
 			$result[ 'finished' ] = true;
 			$result[ 'status' ] = "Finished";
@@ -23,9 +23,10 @@
 			if ( stripos( $contents, "error" ) !== FALSE || stripos( $contents, "error" ) !== FALSE ) {
 				
 				$result[ 'status' ] = "Error detected";
-				$result[ 'log' ] = $contents;
 			
 			}
+			
+			$result[ 'log' ] = $contents;
 			
 		// no not finished yet
 		} else {

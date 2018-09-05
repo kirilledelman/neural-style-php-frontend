@@ -121,27 +121,27 @@
 
         <li>
             <label>Max image size</label>
-            <input id="image_size" title="Maximum side length (in pixels) of of the generated image. Default is 512."/>
+            <input id="image_size" min="64" max="2048" title="Maximum side length (in pixels) of of the generated image. Default is 512."/>
         </li>
 
         <li>
             <label>Content weight</label>
-            <input id="content_weight" title="How much to weight the content reconstruction term. Default is 5."/>
+            <input id="content_weight" min="0" max="10000" title="How much to weight the content reconstruction term. Default is 5."/>
         </li>
 
         <li>
             <label>Style weight</label>
-            <input id="style_weight" title="How much to weight the style reconstruction term. Default is 100."/>
+            <input id="style_weight" min="0" max="10000" title="How much to weight the style reconstruction term. Default is 100."/>
         </li>
 
         <li>
             <label>Random seed</label>
-            <input id="seed" title="Randomizer seed."/>
+            <input id="seed" min="0" max="9999999" title="Randomizer seed."/>
         </li>
 
         <li>
             <label>TV regularization</label>
-            <input id="tv_weight" title="Weight of total-variation (TV) regularization; this helps to smooth the image. Default is 0.001. Set to 0 to disable TV regularization."/>
+            <input id="tv_weight" min="0" max="1" title="Weight of total-variation (TV) regularization; this helps to smooth the image. Default is 0.001. Set to 0 to disable TV regularization."/>
         </li>
 
         <li>
@@ -154,7 +154,7 @@
 
         <li>
             <label>Style scale</label>
-            <input id="style_scale" title="Scale at which to extract features from the style image. Default is 1."/>
+            <input id="style_scale" min="0.0001" title="Scale at which to extract features from the style image. Default is 1."/>
         </li>
 
         <li>
