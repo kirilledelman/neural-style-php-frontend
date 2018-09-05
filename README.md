@@ -56,7 +56,7 @@ sudo yum install protobuf-compiler protobuf-devel
 luarocks install loadcaffe
 ```
 
-Same goes for [https://github.com/jcjohnson/neural-style](jcjohnson/neural-style) itself - it's easiest to install into the same directory as the front end, but
+Same goes for [jcjohnson/neural-style](https://github.com/jcjohnson/neural-style) itself - it's easiest to install into the same directory as the front end, but
 if you already have it installed, you should be able to just update `sys/config.php` with path to
 your installation.
 
@@ -70,7 +70,7 @@ cd ..
 
 ## Usage
 
-After installation, browse to your [http://localhost/neural-style-php-frontend](http://localhost/neural-style-php-frontend). You should see 
+After installation, browse to your **`http://localhost/neural-style-php-frontend`**. You should see 
 the web interface.
 
 ## Troubleshooting
