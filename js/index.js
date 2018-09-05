@@ -217,20 +217,19 @@ function validateAll( e ) {
 			var max = parseFloat( fld.getAttribute( 'max' ) );
 			if ( val != '' && !isNaN( val = parseFloat( val ) ) ) {
 				if ( !isNaN( min ) ) {
-					val = Math.max( min, val );
+					fld.value = val = Math.max( min, val );
 				}
 				if ( !isNaN( max ) ) {
-					val = Math.min( max, val );
+					fld.value = val = Math.min( max, val );
 				}
-				fld.value = val;
-			} else fieldError = true;
+			} else if ( val == '' || !isNaN( min ) || !isNaN( max ) ) fieldError = true;
 		} else {
 			valid = valid && (val != '');
 			fld.classList.toggle( 'error', !val );
 		}
 		//
 		fld.classList.toggle( 'error', fieldError );
-		
+		if ( fieldError ) valid = false;
 	}
 	
 	$('#btnStart').disabled = !valid;

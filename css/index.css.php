@@ -407,6 +407,8 @@ select {
 
 input[disabled] { color: #999; }
 
+input.error { border: 1px solid red; }
+
 select {
     margin-left: 0
 }
