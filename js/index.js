@@ -222,7 +222,9 @@ function validateAll( e ) {
 				if ( !isNaN( max ) ) {
 					fld.value = val = Math.min( max, val );
 				}
-			} else if ( val == '' || !isNaN( min ) || !isNaN( max ) ) fieldError = true;
+			} else if ( val == '' || !isNaN( min ) || !isNaN( max ) ) {
+				fieldError = true;
+			}
 		} else {
 			valid = valid && (val != '');
 			fld.classList.toggle( 'error', !val );
